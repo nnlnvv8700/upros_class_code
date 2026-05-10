@@ -1,10 +1,10 @@
 #局部路径规划器TEBPlannerROS命名空间
 TebLocalPlannerROS:
   #机器人参数
-  max_vel_x: 0.6 #最大x前向速度，单位：m/s
-  max_vel_y: 0.25 #最大y前向速度，单位：m/s，非全向移动小车需要设置为0
-  max_vel_x_backwards: 0.25 #最大后退速度，单位：m/s
-  max_vel_theta: 2.0  #最大转向角速度，单位：rad/s
+  max_vel_x: 0.35 #最大x前向速度，单位：m/s
+  max_vel_y: 0.20 #最大y前向速度，单位：m/s，非全向移动小车需要设置为0
+  max_vel_x_backwards: 0.18 #最大后退速度，单位：m/s
+  max_vel_theta: 1.0  #最大转向角速度，单位：rad/s
   acc_lim_x: 0.3  #最大x向加速度，单位：m/s^2
   acc_lim_y: 0.3  #最大y向加速度，，单位：m/s^2,非全向移动小车需要设置为0
   acc_lim_theta: 0.5  #最大角加速度，单位：rad/s^2
@@ -25,20 +25,20 @@ TebLocalPlannerROS:
   map_frame: map #代价地图的TF参考坐标系
 
   #障碍物参数
-  min_obstacle_dist: 0.10 #和障碍物最小距离，直接影响机器人避障效果
+  min_obstacle_dist: 0.16 #和障碍物最小距离，直接影响机器人避障效果
   # min_obstacle_dist: 0.25 #和障碍物最小距离，直接影响机器人避障效果
   include_costmap_obstacles: True #是否将动态障碍物预测为速度模型，
-  costmap_obstacles_behind_robot_dist: 1.5 #限制机器人后方规划时考虑的局部成本地图障碍物
-  obstacle_poses_affected: 15  #障碍物姿态受影响0~30
+  costmap_obstacles_behind_robot_dist: 0.8 #限制机器人后方规划时考虑的局部成本地图障碍物
+  obstacle_poses_affected: 10  #障碍物姿态受影响0~30
   costmap_converter_plugin: ""
   costmap_converter_spin_thread: True
   costmap_converter_rate: 5
-  include_dynamic_obstacles: True 
-  dynamic_obstacle_inflation_dist: 0.6
+  include_dynamic_obstacles: False 
+  dynamic_obstacle_inflation_dist: 0.30
 
   #目标点误差允许值
-  xy_goal_tolerance: 0.2  #机器人到达目标点时附近时的弧度偏差允许量，在该偏差内认为已经到达目标点，单位为：m
-  yaw_goal_tolerance: 0.1 #机器人到达目标点时附近时的弧度偏差允许量，在该偏差内认为已经到达目标点单位为：rad
+  xy_goal_tolerance: 0.18  #机器人到达目标点时附近时的弧度偏差允许量，在该偏差内认为已经到达目标点，单位为：m
+  yaw_goal_tolerance: 0.20 #机器人到达目标点时附近时的弧度偏差允许量，在该偏差内认为已经到达目标点单位为：rad
   free_goal_vel: False    #允许机器人以最大速度驶向目的地
 
   #轨道配置参数
@@ -47,7 +47,7 @@ TebLocalPlannerROS:
   dt_hysteresis: 0.1 #允许改变的时域解析度的浮动范围， 一般为 dt_ref 的 10% 左右 minimum0.002
   global_plan_overwrite_orientation: False #覆盖全局路径中局部路径点的朝向
   max_global_plan_lookahead_dist: 3.0 #考虑优化的全局计划子集的最大长度
-  feasibility_check_no_poses: 5 #检测位姿可到达的时间间隔 minimum 0
+  feasibility_check_no_poses: 3 #检测位姿可到达的时间间隔 minimum 0
 
   #轨迹优化参数
   no_inner_iterations: 5
@@ -66,8 +66,8 @@ TebLocalPlannerROS:
   weight_kinematics_turning_radius: 1
   weight_optimaltime: 1 #必须大于0
   weight_shortest_path: 0
-  weight_obstacle: 100
-  weight_inflation: 0.2
+  weight_obstacle: 60
+  weight_inflation: 0.5
   # weight_inflation: 0.2
   weight_dynamic_obstacle: 10 
   weight_dynamic_obstacle_inflation: 0.2
@@ -75,9 +75,9 @@ TebLocalPlannerROS:
   weight_adapt_factor: 2
 
   #不同拓扑中的并行规划
-  enable_homotopy_class_planning: True
+  enable_homotopy_class_planning: False
   enable_multithreading: True
-  max_number_classes: 4
+  max_number_classes: 2
   selection_cost_hysteresis: 1.0
   selection_prefer_initial_plan: 0.95
   selection_obst_cost_scale: 1.0

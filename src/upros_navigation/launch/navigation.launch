@@ -2,7 +2,7 @@
 
   <param name="use_sim_time" value="false" />
 
-  <arg name="map_name" default="my_lab.yaml" />
+  <arg name="map_name" default="my_lab1.yaml" />
 
   
 
