@@ -1,3 +1,4 @@
+source /home/bcsh/upros_class_code/devel/setup.bash
 gnome-terminal --window -e 'bash -c "roscore; exec bash"' \
 --tab -e 'bash -c "sleep 3; roslaunch upros_bringup bringup_w2a.launch; exec bash"' \
 --tab -e 'bash -c "sleep 3; roslaunch upros_navigation gmapping.launch; exec bash"' \

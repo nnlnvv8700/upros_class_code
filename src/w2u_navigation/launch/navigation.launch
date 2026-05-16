@@ -3,18 +3,19 @@
   <param name="use_sim_time" value="false" />
 
   <arg name="map_name" default="my_lab.yaml" />
+  <arg name="use_pcl_laser_icp" default="false" />
 
 
 
   <node name="map_server" pkg="map_server" type="map_server" args="$(find upros_navigation)/maps/$(arg map_name)"/>
 
+  <node name="filtered_scan_publisher" pkg="upros_lidar_filter" type="filtered_scan_publisher" output="screen" respawn="true" />
+
   
 
   <include file="$(find w2u_navigation)/launch/include/move_base.launch.xml" />
-    <include file="$(find upros_navigation)/launch/include/amcl.launch.xml" />
+  <include file="$(find w2u_navigation)/launch/include/amcl.launch.xml" />
 
-    <node name="pcl_laser_icp" pkg="upros_lidar_filter" type="pcl_laser_icp" output="screen"/>
+  <node if="$(arg use_pcl_laser_icp)" name="pcl_laser_icp" pkg="upros_lidar_filter" type="pcl_laser_icp" output="screen"/>
 
 </launch>
-
-

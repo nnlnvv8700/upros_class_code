@@ -1,4 +1,5 @@
 #include <ros/ros.h>
+#include <ros/package.h>
 #include <sensor_msgs/LaserScan.h>
 #include <sensor_msgs/PointCloud2.h>
 #include <nav_msgs/Odometry.h>
@@ -10,6 +11,7 @@
 #include <pcl/registration/icp.h>
 #include <pcl_conversions/pcl_conversions.h>
 #include <Eigen/Dense>
+#include <string>
 
 class LaserScanToPointCloud {
 public:
@@ -22,8 +24,15 @@ public:
     odom_sub_ = nh.subscribe("/odom", 10, &LaserScanToPointCloud::odomCallback, this);
     cloud_pub_ = nh.advertise<sensor_msgs::PointCloud2>("point_cloud", 10);
 
-    if (pcl::io::loadPCDFile<pcl::PointXYZ>("/home/bcsh/upros_class_code/src/upros_navigation/maps/write.pcd", *target_cloud_) == -1) {
-      ROS_ERROR("Couldn't read PCD file");
+    const std::string navigation_path = ros::package::getPath("upros_navigation");
+    const std::string pcd_path = navigation_path + "/maps/write.pcd";
+    if (navigation_path.empty()) {
+      ROS_ERROR("Couldn't find ROS package: upros_navigation");
+      return;
+    }
+
+    if (pcl::io::loadPCDFile<pcl::PointXYZ>(pcd_path, *target_cloud_) == -1) {
+      ROS_ERROR("Couldn't read PCD file: %s", pcd_path.c_str());
       return;
     }
     kdtree_.setInputCloud(target_cloud_);
@@ -172,4 +181,3 @@ int main(int argc, char** argv) {
   ros::spin();
   return 0;
 }
-

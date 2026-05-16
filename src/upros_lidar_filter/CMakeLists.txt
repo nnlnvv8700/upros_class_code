@@ -9,12 +9,13 @@ find_package(catkin REQUIRED COMPONENTS
   laser_geometry
   pcl_ros
   pcl_conversions
+  roslib
 )
 
 catkin_package()
 
 catkin_package(
-  CATKIN_DEPENDS roscpp sensor_msgs laser_geometry pcl_ros pcl_conversions
+  CATKIN_DEPENDS roscpp sensor_msgs laser_geometry pcl_ros pcl_conversions roslib
 )
 
 
@@ -24,7 +25,7 @@ include_directories(
 )
 
 catkin_package(
-  CATKIN_DEPENDS roscpp sensor_msgs laser_geometry pcl_ros pcl_conversions
+  CATKIN_DEPENDS roscpp sensor_msgs laser_geometry pcl_ros pcl_conversions roslib
 )
 
 add_executable(filtered_scan_publisher src/filtered_scan_publisher.cpp)

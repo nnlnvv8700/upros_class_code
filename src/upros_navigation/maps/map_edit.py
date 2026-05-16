@@ -1,6 +1,8 @@
 import cv2
+from pathlib import Path
 
-img = cv2.imread('/home/bcsh/upros_class_code/src/upros_navigation/maps/my_lab.pgm')  # 读取图像
+MAP_DIR = Path(__file__).resolve().parent
+img = cv2.imread(str(MAP_DIR / 'my_lab.pgm'))  # 读取图像
 
 # 获取某个像素点的像素值（以BGR通道顺序为例，即Blue、Green、Red）
 # 假设要获取像素点(100, 200)的像素值
@@ -24,6 +26,6 @@ while(1):
     key = cv2.waitKey(5) & 0xFF
     if key == ord(' '):
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        cv2.imwrite('/home/bcsh/upros_class_code/src/upros_navigation/maps/my_lab1.pgm', gray) 
+        cv2.imwrite(str(MAP_DIR / 'my_lab1.pgm'), gray) 
         break
 cv2.destroyAllWindows()

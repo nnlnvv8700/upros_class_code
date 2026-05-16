@@ -21,8 +21,8 @@
     <param name="with_angle_filter" value="true"/>
     <param name="min_angle" value="-3.1415926"/>
     <param name="max_angle" value="3.1415926"/> 
-    <rosparam param="mask1" >[0.52,0.98]</rosparam>
-    <rosparam param="mask2" >[-0.98,-0.52]</rosparam>
+    <rosparam param="mask1" >[0.72,1.12]</rosparam>
+    <rosparam param="mask2" >[-1.32,-0.72]</rosparam>
     <rosparam param="mask3" >[2.09,2.62]</rosparam>
     <rosparam param="mask4" >[-2.62,-2.09]</rosparam>  
     <param name="error_circle" value="3"/>

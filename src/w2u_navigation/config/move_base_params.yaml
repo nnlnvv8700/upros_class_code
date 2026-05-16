@@ -24,19 +24,13 @@ recovery_behaviors:
     #选择恢复行为类型
     type: "clear_costmap_recovery/ClearCostmapRecovery"
   #自定义恢复行为名称
-  - name: "recovery_behavior_2"
-    #选择恢复行为类型
-    type: "rotate_recovery/RotateRecovery"
-  #自定义恢复行为名称
-  - name: "recovery_behavior_3"
-    #选择恢复行为类型
-    type: "move_slow_and_clear/MoveSlowAndClear"
+  # 先禁用带运动的恢复行为，避免规划失败后机器人在场地边缘自动旋转/后退。
 
 #是否开启恢复行为。
-recovery_behavior_enabled: true
+recovery_behavior_enabled: false
 
 #是否开启恢复行为中控制机器人旋转的恢复行为。注意，此参数仅在move_base使用默认恢复行为时使用。
-clearing_rotation_allowed: true
+clearing_rotation_allowed: false
 
 #执行恢复行为时，与机器人距离3米外的障碍物会被清除，单位：s。注意，此参数仅在move_base使用默认恢复行为时使用。
 conservative_reset_dist: 2.0
