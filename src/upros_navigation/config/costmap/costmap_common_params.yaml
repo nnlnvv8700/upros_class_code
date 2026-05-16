@@ -8,7 +8,7 @@ footprint: [[-0.18, -0.14], [-0.18, 0.14], [0.18, 0.14], [0.18, -0.14]]
 inflation_layer:
   enabled: true
   cost_scaling_factor: 5.0
-  inflation_radius: 0.35
+  inflation_radius: 0.20
 
 #设置静态层参数
 static_layer:
